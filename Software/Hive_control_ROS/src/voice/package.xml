@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>voice</name>
+  <version>1.0.0</version>
+  <description>Unified voice system for drone swarm</description>
+
+  <maintainer email="your@email.com">Your Name</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <depend>roscpp</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
+  
+  <export>
+  </export>
+</package>

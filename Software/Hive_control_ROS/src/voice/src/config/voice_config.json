@@ -1,0 +1,26 @@
+{
+    "asr": {
+        "model_path": "./models/funasr",
+        "sample_rate": 16000,
+        "language": "zh",
+        "enable_stream": true
+    },
+    "audio": {
+        "device_index": 0,
+        "channels": 1,
+        "chunk_size": 4096,
+        "sample_rate": 16000
+    },
+    "wakeword": {
+        "enabled": true,
+        "model_path": "./models/wakeword",
+        "keyword": "小飞",
+        "sensitivity": 0.5
+    },
+    "tts": {
+        "enabled": true,
+        "voice": "xiaoyan",
+        "speed": 50,
+        "volume": 50
+    }
+}

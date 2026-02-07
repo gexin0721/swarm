@@ -1,0 +1,8 @@
+<launch>
+  <!-- Voice System Launch File -->
+  
+  <node name="voice_node" pkg="voice" type="voice_node" output="screen">
+    <param name="config_path" value="$(find voice)/src/config/engine_config.json" />
+  </node>
+  
+</launch>
