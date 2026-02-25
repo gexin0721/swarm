@@ -25,9 +25,9 @@ int main(int argc, char **argv)
 
     ros::NodeHandle node("~");
 
-    //等待udp_ros_bridge节点初始化完毕
-    // 因为udp_ros_bridge统计了无人机数量
-    ros::NodeHandle nh_udp("udp_ros_bridge");
+    //等待message_manager节点初始化完毕
+    // 因为message_manager统计了无人机数量
+    ros::NodeHandle nh_udp("message_manager");
     while (ros::ok() && drone_num == 0)
     {
         node.param("drone_num", drone_num, 0);

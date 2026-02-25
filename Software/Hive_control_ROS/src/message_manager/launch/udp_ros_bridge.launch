@@ -1,0 +1,5 @@
+<launch>
+    <node name="message_manager" pkg="message_manager" type="message_manager" output="screen">
+        <param name="port" value="11451" />
+    </node>
+</launch>
