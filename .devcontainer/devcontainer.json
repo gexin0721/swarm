@@ -1,0 +1,72 @@
+{
+	"name": "ROS Noetic + ODB + EMQX Development Container",
+	"build": {
+		"dockerfile": "Dockerfile.ros",
+		"context": ".."
+	},
+	"workspaceFolder": "/workspace",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+	
+	// VS Code 配置
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"terminal.integrated.shell.linux": "/bin/bash",
+				"python.defaultInterpreterPath": "/usr/bin/python3",
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": true,
+				"cmake.configureOnOpen": true
+			},
+			"extensions": [
+				// C++ 开发
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cmake-tools",
+				"twxs.cmake",
+				
+				// Python 开发
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				
+				// ROS 开发
+				"ms-iot.vscode-ros",
+				
+				// 其他工具
+				"eamodio.gitlens",
+				"streetsidesoftware.code-spell-checker"
+			]
+		}
+	},
+
+	// 容器运行参数
+	"runArgs": [
+		"--network=host",
+		"--privileged",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp=unconfined"
+	],
+
+	// 端口转发
+	"forwardPorts": [
+		11311,  // ROS Master
+		18083,  // EMQX Dashboard
+		1883,   // MQTT
+		8883,   // MQTT SSL
+		8083,   // MQTT WebSocket
+		8084    // MQTT WebSocket SSL
+	],
+
+	// 容器启动后执行的命令
+	"postCreateCommand": "bash -c 'echo \"=== ROS + ODB + EMQX 开发容器已就绪 ===\" && echo \"ROS 版本: $(rosversion -d)\" && echo \"ODB 编译器: $(which odb)\" && echo \"EMQX 版本: $(emqx version 2>/dev/null || echo \"未启动\")\" && echo \"Python 版本: $(python3 --version)\" && echo \"工作目录: /workspace\" && echo \"\" && echo \"快速命令:\" && echo \"  启动 EMQX: emqx start\" && echo \"  停止 EMQX: emqx stop\" && echo \"  EMQX 控制台: http://localhost:18083 (admin/public)\" && echo \"  编译 ROS: cd /workspace/Software/Hive_control_ROS && catkin_make\" && echo \"  source ROS: source /workspace/Software/Hive_control_ROS/devel/setup.bash\"'",
+
+	// 远程用户
+	"remoteUser": "root",
+
+	// 环境变量
+	"containerEnv": {
+		"ROS_HOSTNAME": "localhost",
+		"ROS_MASTER_URI": "http://localhost:11311",
+		"DISPLAY": ":0"
+	}
+}
