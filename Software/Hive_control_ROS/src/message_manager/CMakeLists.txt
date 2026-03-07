@@ -42,6 +42,7 @@ add_executable(${PROJECT_NAME}
   src/main.cpp
   src/network/serve.cpp
   src/tool/Logger.cpp
+  test/test_mqtt_client.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
@@ -49,4 +50,5 @@ target_link_libraries(${PROJECT_NAME}
   ${JSONCPP_LIBRARIES}
   paho-mqttpp3
   paho-mqtt3as
+  pthread
 )
