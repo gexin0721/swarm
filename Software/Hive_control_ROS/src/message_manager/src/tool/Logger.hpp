@@ -64,8 +64,18 @@ public:
     /**
      * @brief 设置日志文件路径
      * @param filename 日志文件的完整路径，以追加模式打开
+     * @note 如果不设置，默认保存到 ./logs/message_manager.log
      */
     void setLogFile(const std::string& filename);
+    
+    /**
+     * @brief 初始化默认日志文件
+     * @param logDir 日志目录路径，默认为 "./logs"
+     * @param logName 日志文件名，默认为 "message_manager.log"
+     * @return 是否成功创建日志文件
+     */
+    bool initDefaultLogFile(const std::string& logDir = "./logs", 
+                           const std::string& logName = "message_manager.log");
     
     /**
      * @brief 启用或禁用控制台输出

@@ -5,6 +5,18 @@
 
 #include "Logger.hpp"
 #include <iostream>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+// 跨平台目录创建兼容性处理
+#ifdef _WIN32
+    #include <direct.h>
+    // Windows下的mkdir只需要一个参数
+    #define mkdir(dir, mode) _mkdir(dir)
+#else
+    // Linux/Unix下的mkdir需要两个参数（路径和权限）
+    // 这里不需要额外处理，直接使用系统的mkdir即可
+#endif
 
 namespace tool {
 
@@ -47,6 +59,30 @@ void Logger::setLogFile(const std::string& filename) {
     if (!logFile_.is_open()) {
         std::cerr << "Failed to open log file: " << filename << std::endl;
     }
+}
+
+// 初始化默认日志文件（创建目录并设置日志文件）
+bool Logger::initDefaultLogFile(const std::string& logDir, const std::string& logName) {
+    // 创建日志目录（如果不存在）
+    struct stat info;
+    if (stat(logDir.c_str(), &info) != 0) {
+        // 目录不存在，尝试创建
+        if (mkdir(logDir.c_str(), 0755) != 0) {
+            std::cerr << "Failed to create log directory: " << logDir << std::endl;
+            return false;
+        }
+        std::cout << "Created log directory: " << logDir << std::endl;
+    }
+    
+    // 设置日志文件路径
+    std::string logPath = logDir + "/" + logName;
+    setLogFile(logPath);
+    
+    // 记录日志系统启动信息
+    info("========== Logger Initialized ==========");
+    info("Log file: " + logPath);
+    
+    return logFile_.is_open();
 }
 
 // 启用或禁用控制台输出
