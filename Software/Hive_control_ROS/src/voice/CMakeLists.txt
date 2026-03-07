@@ -12,6 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 # 查找外部依赖
 find_package(ALSA REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(JSONCPP jsoncpp)
 
 catkin_package(
   CATKIN_DEPENDS roscpp rospy std_msgs
@@ -20,6 +22,7 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
   ${ALSA_INCLUDE_DIRS}
+  ${JSONCPP_INCLUDE_DIRS}
   src
 )
 
@@ -37,7 +40,7 @@ add_executable(voice_node
 target_link_libraries(voice_node
   ${catkin_LIBRARIES}
   ${ALSA_LIBRARIES}
-  -ljsoncpp
+  ${JSONCPP_LIBRARIES}
   # -lfunasr  # FunASR库（安装后取消注释）
 )
 

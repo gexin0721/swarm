@@ -64,8 +64,8 @@ void Logger::setLogFile(const std::string& filename) {
 // 初始化默认日志文件（创建目录并设置日志文件）
 bool Logger::initDefaultLogFile(const std::string& logDir, const std::string& logName) {
     // 创建日志目录（如果不存在）
-    struct stat info;
-    if (stat(logDir.c_str(), &info) != 0) {
+    struct stat st;
+    if (stat(logDir.c_str(), &st) != 0) {
         // 目录不存在，尝试创建
         if (mkdir(logDir.c_str(), 0755) != 0) {
             std::cerr << "Failed to create log directory: " << logDir << std::endl;
@@ -73,15 +73,15 @@ bool Logger::initDefaultLogFile(const std::string& logDir, const std::string& lo
         }
         std::cout << "Created log directory: " << logDir << std::endl;
     }
-    
+
     // 设置日志文件路径
     std::string logPath = logDir + "/" + logName;
     setLogFile(logPath);
-    
+
     // 记录日志系统启动信息
     info("========== Logger Initialized ==========");
     info("Log file: " + logPath);
-    
+
     return logFile_.is_open();
 }
 
