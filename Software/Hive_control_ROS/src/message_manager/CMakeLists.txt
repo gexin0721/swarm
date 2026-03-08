@@ -37,7 +37,7 @@ include_directories(
   ${JSONCPP_INCLUDE_DIRS}
 )
 
-# Executable
+# Main Executable
 add_executable(${PROJECT_NAME}
   src/main.cpp
   src/network/serve.cpp
@@ -52,3 +52,29 @@ target_link_libraries(${PROJECT_NAME}
   paho-mqtt3as
   pthread
 )
+
+#############
+## Testing ##
+#############
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(GTest REQUIRED)
+
+  # Logger测试
+  catkin_add_gtest(test_logger
+    test/test_logger.cpp
+    src/tool/Logger.cpp
+  )
+
+  target_include_directories(test_logger PRIVATE
+    ${catkin_INCLUDE_DIRS}
+    ${GTEST_INCLUDE_DIRS}
+  )
+
+  target_link_libraries(test_logger
+    ${catkin_LIBRARIES}
+    ${GTEST_LIBRARIES}
+    pthread
+    stdc++fs
+  )
+endif()
