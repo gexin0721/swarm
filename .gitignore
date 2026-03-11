@@ -81,4 +81,4 @@ Software/Hive_control_ROS/src/AI/scripts/role/secret_key.Json
 
 .VSCodeCounter/*
 .claude/*
-Software/UAV_ESP/*
+# Software/UAV_ESP/*

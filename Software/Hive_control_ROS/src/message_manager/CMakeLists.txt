@@ -77,4 +77,31 @@ if(CATKIN_ENABLE_TESTING)
     pthread
     stdc++fs
   )
+
+  # LevelDB测试
+  add_executable(test_leveldb
+    test/test_leveldb.cpp
+  )
+
+  target_link_libraries(test_leveldb
+    leveldb
+    pthread
+  )
+
+  # SOCI + MySQL测试
+  add_executable(test_soci_mysql
+    test/test_soci_mysql.cpp
+  )
+
+  target_include_directories(test_soci_mysql PRIVATE
+    /usr/include/soci
+    /usr/include/mysql
+  )
+
+  target_link_libraries(test_soci_mysql
+    soci_core
+    soci_mysql
+    mysqlclient
+    pthread
+  )
 endif()
