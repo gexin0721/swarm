@@ -1,12 +1,13 @@
 idf_component_register(SRCS "main.cpp" 
                             "task_attitude/task_attitude.cpp"
                             "../Hardware/WIFI/WIFI.cpp"
-                            "../Hardware/UDP/UDP.cpp"
                             "../Hardware/I2Cdev/I2Cdev.cpp"
                             "../Hardware/MPU6050/MPU6050.cpp"
                             "../Hardware/BMP280/BMP280.cpp"
                             "../Hardware/QMC5883L/QMC5883L.cpp"
                             "../Hardware/TIME/TIME.cpp"
+                            "../Hardware/ADC/ADC.cpp"
                             "../System/delay/delay.cpp"
                             "../System/sys/sys.cpp"
-                       INCLUDE_DIRS "." "task_attitude" "../Hardware" "../System")
+                       INCLUDE_DIRS "." "task_attitude" "../Hardware" "../System"
+                       REQUIRES mqtt)

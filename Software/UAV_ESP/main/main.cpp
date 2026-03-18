@@ -10,8 +10,6 @@ extern "C" int app_main(void)
     // 多线程处理
     // 姿态管理线程（MPU6050 + QMC5883L + BMP280）
     xTaskCreate(&task_attitude, "attitude_task", 8192, NULL, 5, NULL);
-    // UDP线程
-    xTaskCreate(&udp_task, "udp_task", 8192, NULL, 5, NULL);
 
 
     while(1){
