@@ -1,5 +1,5 @@
 #include "main.h"
-#include "task_MPU6050/task_MPU6050.h"
+#include "task_attitude/task_attitude.h"
 #include "task_UDP/task_UDP.h"
 
 
@@ -8,8 +8,8 @@ extern "C" int app_main(void)
 
     // ============= 硬件初始化 =============
     // 多线程处理
-    // 陀螺仪线程
-    xTaskCreate(&task_MPU6050, "mpu6050_task", 8192, NULL, 5, NULL);
+    // 姿态管理线程（MPU6050 + QMC5883L + BMP280）
+    xTaskCreate(&task_attitude, "attitude_task", 8192, NULL, 5, NULL);
     // UDP线程
     xTaskCreate(&udp_task, "udp_task", 8192, NULL, 5, NULL);
 
