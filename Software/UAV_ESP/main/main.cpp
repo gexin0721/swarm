@@ -1,6 +1,7 @@
 #include "main.h"
 #include "task_attitude/task_attitude.h"
 
+static const char *TAG = "MAIN";
 
 extern "C" int app_main(void)
 {

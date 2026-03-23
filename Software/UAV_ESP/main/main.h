@@ -11,7 +11,6 @@
 
 
 // 定义TAG
-static const char *TAG = "MAIN";
 
 
 #endif
