@@ -82,8 +82,6 @@ class I2Cdev {
         static bool writeBytes(uint8_t devAddr, uint8_t regAddr, uint8_t length, uint8_t *data);
 
         static uint16_t readTimeout;
-
-    private:
         // ----------- I2C 选择寄存器 -----------
         static void SelectRegister(uint8_t dev, uint8_t reg);
 };

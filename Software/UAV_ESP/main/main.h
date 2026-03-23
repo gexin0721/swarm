@@ -6,15 +6,12 @@
 #include "freertos/task.h"
 #include "esp_log.h"
 #include "../Hardware/WIFI/WIFI.h"
-#include "../Hardware/UDP/UDP.h"
 #include "../System/delay/delay.h"
 #include "../System/sys/sys.h"
-#include "task_BMP280/task_BMP280.h"
-#include "task_QMC5883L/task_QMC5883L.h"
 
 
 // 定义TAG
-// static const char *TAG = "MAIN";
+static const char *TAG = "MAIN";
 
 
 #endif

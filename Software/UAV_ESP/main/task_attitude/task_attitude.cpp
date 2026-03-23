@@ -39,16 +39,16 @@ static bool i2c_read_cb(uint8_t dev_addr, uint8_t reg_addr, uint8_t *buf, uint8_
 void task_attitude(void*) {
 
     // ===== I2C 总线初始化 =====
-    I2Cdev::initI2C(PIN_SDA, PIN_CLK);
+    I2Cdev::initI2C((gpio_num_t)PIN_SDA, (gpio_num_t)PIN_CLK);
 
-    // ===== MPU6050 初始化 =====
-    MPU6050 mpu = MPU6050();
-    mpu.initialize();
-    mpu.dmpInitialize();
-    mpu.CalibrateAccel(6);
-    mpu.CalibrateGyro(6);
-    mpu.setDMPEnabled(true);
-    ESP_LOGI(TAG, "MPU6050 初始化完成");
+    // // ===== MPU6050 初始化 =====
+    // MPU6050 mpu = MPU6050();
+    // mpu.initialize();
+    // mpu.dmpInitialize();
+    // mpu.CalibrateAccel(6);
+    // mpu.CalibrateGyro(6);
+    // mpu.setDMPEnabled(true);
+    // ESP_LOGI(TAG, "MPU6050 初始化完成");
 
     // ===== QMC5883L 初始化 =====
     QMC5883L qmc(i2c_write_cb, i2c_read_cb);
@@ -68,18 +68,18 @@ void task_attitude(void*) {
 
     while (1) {
         // ===== MPU6050 读取 =====
-        mpuIntStatus = mpu.getIntStatus();
-        fifoCount    = mpu.getFIFOCount();
+        // mpuIntStatus = mpu.getIntStatus();
+        // fifoCount    = mpu.getFIFOCount();
 
-        if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
-            mpu.resetFIFO();
-        } else if (mpuIntStatus & 0x02) {
-            while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
-            mpu.getFIFOBytes(fifoBuffer, packetSize);
-            mpu.dmpGetQuaternion(&q, fifoBuffer);
-            mpu.dmpGetGravity(&gravity, &q);
-            mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
-        }
+        // if ((mpuIntStatus & 0x10) || fifoCount == 1024) {
+        //     mpu.resetFIFO();
+        // } else if (mpuIntStatus & 0x02) {
+        //     while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
+        //     mpu.getFIFOBytes(fifoBuffer, packetSize);
+        //     mpu.dmpGetQuaternion(&q, fifoBuffer);
+        //     mpu.dmpGetGravity(&gravity, &q);
+        //     mpu.dmpGetYawPitchRoll(ypr, &q, &gravity);
+        // }
 
         // ===== QMC5883L 读取 =====
         if (qmc.read()) {

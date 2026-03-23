@@ -1,6 +1,6 @@
 #include "BMP280.h"
 #include <math.h>
-
+#include <cstring>
 // ================ 构造函数 ================
 // 功能: 创建BMP280对象，可选地设置I2C回调函数
 // 参数: write_cb - I2C写回调函数指针(可选)

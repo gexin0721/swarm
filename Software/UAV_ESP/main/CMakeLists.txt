@@ -10,4 +10,12 @@ idf_component_register(SRCS "main.cpp"
                             "../System/delay/delay.cpp"
                             "../System/sys/sys.cpp"
                        INCLUDE_DIRS "." "task_attitude" "../Hardware" "../System"
-                       REQUIRES mqtt)
+                       REQUIRES mqtt
+                                driver
+                                esp_driver_gpio
+                                esp_driver_gptimer
+                                esp_driver_i2c
+                                esp_adc
+                                nvs_flash
+                                esp_wifi
+                                esp_event)

@@ -1,5 +1,6 @@
 #include "QMC5883L.h"
 #include <math.h>
+#include "esp_timer.h"
 
 // ================ 构造函数 ================
 // 功能: 创建QMC5883L对象，可选地设置I2C回调函数
@@ -105,10 +106,10 @@ bool QMC5883L::calibrate() {
   	long	y = calibrationData[1][0] = calibrationData[1][1] = getY();  // 初始化Y轴数据
   	long	z = calibrationData[2][0] = calibrationData[2][1] = getZ();  // 初始化Z轴数据
 
-	unsigned long startTime = millis();  // 记录开始时间
+	unsigned long startTime = (unsigned long)(esp_timer_get_time() / 1000);  // 记录开始时间(ms)
 
 	// 在10秒内循环读取传感器数据
-	while((millis() - startTime) < 10000) {
+	while(((unsigned long)(esp_timer_get_time() / 1000) - startTime) < 10000) {
 		read();  // 读取传感器数据
 
   		x = getX();  // 获取X轴值
@@ -152,6 +153,7 @@ bool QMC5883L::calibrate() {
 		calibrationData[2][0],
 		calibrationData[2][1]
 	);
+	return true;
 }
 
 

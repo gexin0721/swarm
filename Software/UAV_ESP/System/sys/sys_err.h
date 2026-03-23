@@ -1,5 +1,6 @@
 #ifndef SYS_ERR_H
 #define SYS_ERR_H
+
 #define SYS_ERR_OK 0                //成功
 #define SYS_ERR_INIT 1              //初始化失败
 #define SYS_ERR_START 2             //启动失败

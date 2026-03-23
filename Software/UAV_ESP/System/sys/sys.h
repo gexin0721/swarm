@@ -2,12 +2,14 @@
 #define SYS_H
 // ============ 头文件 ============
 #include "driver/gpio.h"
-#include "../../Hardware/TIME/TIME.h"
-#include "sys_err.h"
-// ============ 公共参数 ============
-extern QueueHandle_t DUP_queue; // DUP数据队列
+#include "freertos/FreeRTOS.h"
+#include "nvs.h"
+#include "./sys_err.h"
+#include "../../Hardware/TIME/TIME.h" 
 
-nvs_handle_t PID_handle; // PID 闪存类
+// ============ 公共参数 ============
+extern TIME PID_time;       // PID 定时器
+nvs_handle_t PID_handle;    // PID 闪存类
 
 // ============ 系统初始化 ============
 
