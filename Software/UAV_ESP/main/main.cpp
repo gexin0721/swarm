@@ -14,9 +14,9 @@ extern "C" int app_main(void)
 
     while(1){
 
-        // 打印偏航/俯仰/翻滚
-        ESP_LOGI(TAG, "YAW: %3.1f, PITCH: %3.1f, ROLL: %3.1f", 
-                 ypr[0] * 180/M_PI, ypr[1] * 180/M_PI, ypr[2] * 180/M_PI);
+        // 打印气压计数据
+        ESP_LOGI(TAG, "TEMP: %.2f C, PRES: %.2f Pa, ALT: %.2f m",
+                 baro_temperature, baro_pressure, baro_altitude);
 
         // 延时1秒
         vTaskDelay(1000/portTICK_PERIOD_MS);

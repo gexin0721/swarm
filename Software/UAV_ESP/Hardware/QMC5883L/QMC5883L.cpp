@@ -184,10 +184,10 @@ bool QMC5883L::init() {
         return false;
     }
 
-    // 步骤1: 验证芯片ID
-    if (!verifyChipID()) {
-        return false;
-    }
+    // // 步骤1: 验证芯片ID
+    // if (!verifyChipID()) {
+    //     return false;
+    // }
 
     // 步骤2: 设置SET/RESET周期寄存器
     // 推荐值为0x01，用于周期性地对传感器进行SET/RESET操作，提高测量精度
@@ -205,7 +205,7 @@ bool QMC5883L::init() {
         return false;
     }
     
-    return calibrate();
+    return true;
 }
 
 // ================ 读取三轴磁场数据 ================

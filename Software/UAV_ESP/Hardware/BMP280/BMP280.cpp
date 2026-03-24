@@ -1,6 +1,8 @@
 #include "BMP280.h"
 #include <math.h>
 #include <cstring>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 // ================ 构造函数 ================
 // 功能: 创建BMP280对象，可选地设置I2C回调函数
 // 参数: write_cb - I2C写回调函数指针(可选)
@@ -113,15 +115,17 @@ bool BMP280::readCalibration() {
 // 参数: 无
 // 返回: 成功返回true, 失败返回false
 bool BMP280::init() {
-    // 步骤1: 验证芯片ID
-    if (!verifyChipID()) {
-        return false;
-    }
+    // // 步骤1: 验证芯片ID
+    // if (!verifyChipID()) {
+    //     return false;
+    // }
 
     // 步骤2: 软复位
     if (!reset()) {
         return false;
     }
+    // 等待复位完成(BMP280数据手册要求约2ms，取10ms保险)
+    vTaskDelay(10 / portTICK_PERIOD_MS);
 
     // 步骤3: 读取校准参数
     if (!readCalibration()) {

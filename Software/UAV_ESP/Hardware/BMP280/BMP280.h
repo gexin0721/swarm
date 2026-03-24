@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 // ================ BMP280 I2C地址 ================
-#define BMP280_ADDR 0x77  // 默认地址，可通过SDO引脚改为0x76
+#define BMP280_ADDR 0x76  // 默认地址，可通过SDO引脚改为0x76
 
 // ================ BMP280 寄存器地址 ================
 #define BMP280_REG_CHIP_ID          0xD0

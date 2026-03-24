@@ -41,7 +41,7 @@ void task_attitude(void*) {
     // ===== I2C 总线初始化 =====
     I2Cdev::initI2C((gpio_num_t)PIN_SDA, (gpio_num_t)PIN_CLK);
 
-    // // ===== MPU6050 初始化 =====
+    // ===== MPU6050 初始化 =====
     // MPU6050 mpu = MPU6050();
     // mpu.initialize();
     // mpu.dmpInitialize();
@@ -51,12 +51,12 @@ void task_attitude(void*) {
     // ESP_LOGI(TAG, "MPU6050 初始化完成");
 
     // ===== QMC5883L 初始化 =====
-    QMC5883L qmc(i2c_write_cb, i2c_read_cb);
-    if (qmc.init()) {
-        ESP_LOGI(TAG, "QMC5883L 初始化完成");
-    } else {
-        ESP_LOGW(TAG, "QMC5883L 初始化失败");
-    }
+    // QMC5883L qmc(i2c_write_cb, i2c_read_cb);
+    // if (qmc.init()) {
+    //     ESP_LOGI(TAG, "QMC5883L 初始化完成");
+    // } else {
+    //     ESP_LOGW(TAG, "QMC5883L 初始化失败");
+    // }
 
     // ===== BMP280 初始化 =====
     BMP280 bmp(i2c_write_cb, i2c_read_cb);
@@ -82,10 +82,10 @@ void task_attitude(void*) {
         // }
 
         // ===== QMC5883L 读取 =====
-        if (qmc.read()) {
-            mag_azimuth = qmc.getAzimuth();
-            qmc.getCalibratedData(mag_x, mag_y, mag_z);
-        }
+        // if (qmc.read()) {
+        //     mag_azimuth = qmc.getAzimuth();
+        //     qmc.getCalibratedData(mag_x, mag_y, mag_z);
+        // }
 
         // ===== BMP280 读取 =====
         bmp.getMeasurements(baro_temperature, baro_pressure, baro_altitude);

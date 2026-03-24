@@ -269,7 +269,7 @@ int8_t I2Cdev::readWord(uint8_t devAddr, uint8_t regAddr, uint16_t *data, uint16
 
 
 int8_t I2Cdev::initI2C(gpio_num_t sda_pin, gpio_num_t scl_pin){
-	i2c_config_t conf;
+	i2c_config_t conf = {};
 	conf.mode = I2C_MODE_MASTER;
 	conf.sda_io_num = sda_pin;
 	conf.scl_io_num = scl_pin;
